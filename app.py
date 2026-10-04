@@ -3,7 +3,12 @@ import sqlite3
 
 app = Flask(__name__)
 
-DATABASE = "portfolio.db"
+import os
+
+if os.environ.get("VERCEL"):
+    DATABASE = "/tmp/portfolio.db"
+else:
+    DATABASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "portfolio.db")
 
 
 def get_db_connection():
